@@ -98,7 +98,7 @@ class Cony
         $result = 0;
         $len = strlen($input) - 1;
         for ($t = $len; $t >= 0; --$t) {
-            if (!function_exists('bcpow')) {
+            if (function_exists('bcpow')) {
                 $pow = bcpow($dictionaryLength, $len - $t);
             } else {
                 $pow = pow($dictionaryLength, $len - $t);
@@ -126,7 +126,7 @@ class Cony
         }
         $output = '';
         for ($t = (0 != $input ? floor(log($input, $dictionaryLength)) : 0); $t >= 0; --$t) {
-            if (!function_exists('bcpow')) {
+            if (function_exists('bcpow')) {
                 $pow = bcpow($dictionaryLength, $t);
             } else {
                 $pow = pow($dictionaryLength, $t);
