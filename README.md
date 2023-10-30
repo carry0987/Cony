@@ -1,4 +1,5 @@
 # Cony
+[![Packgist](https://img.shields.io/packagist/v/carry0987/cony.svg?style=flat-square)](https://packagist.org/packages/carry0987/cony)  
 Cony is a PHP library for convert integer into alphabet, and reversely too
 
 ## Installation
