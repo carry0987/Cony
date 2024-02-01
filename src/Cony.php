@@ -26,6 +26,7 @@ class Cony
         if (!empty($secureKey)) {
             $dictionary = self::secureEncrypt($dictionary, $dictionaryLength, $secureKey);
         }
+
         return self::convertToNumber($input, $dictionary, $dictionaryLength, $padUp);
     }
 
@@ -44,6 +45,7 @@ class Cony
         if (!empty($secureKey)) {
             $dictionary = self::secureEncrypt($dictionary, $dictionaryLength, $secureKey);
         }
+
         return self::transformType(
             self::convertToAlphanumeric((int) $input, $dictionary, $dictionaryLength, $padUp),
             $transformType
@@ -82,6 +84,7 @@ class Cony
             SORT_DESC,
             $dictionaryArray
         );
+
         return implode($dictionaryArray);
     }
 
@@ -91,9 +94,9 @@ class Cony
      * @param int    $dictionaryLength
      * @param int    $padUp
      *
-     * @return string
+     * @return int
      */
-    private static function convertToNumber(string $input, string $dictionary, int $dictionaryLength, int $padUp = 0): string
+    private static function convertToNumber(string $input, string $dictionary, int $dictionaryLength, int $padUp = 0): int
     {
         $result = 0;
         $len = strlen($input) - 1;
@@ -108,6 +111,7 @@ class Cony
         if (--$padUp > 0) {
             $result -= pow($dictionaryLength, $padUp);
         }
+
         return $result;
     }
 
@@ -135,6 +139,7 @@ class Cony
             $output .= substr($dictionary, $a, 1);
             $input -= $a * $pow;
         }
+
         return $output;
     }
 
