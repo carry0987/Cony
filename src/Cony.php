@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace carry0987\Cony;
 
 use carry0987\Cony\Exception\ConyException;
@@ -13,11 +14,13 @@ class Cony
     const TRANSFORM_LOWERCASE = 2;
 
     /**
-     * @param string      $input
-     * @param int         $padUp
-     * @param string|null $secureKey
+     * Translates a short alphanumeric string back to a numeric ID.
      *
-     * @return int
+     * @param string      $input     The alphanumeric string to convert.
+     * @param int         $padUp     The amount to pad up, default is 0.
+     * @param string|null $secureKey An optional key to secure the conversion.
+     *
+     * @return int The numeric representation of the input string.
      */
     public static function toNumeric(string $input, int $padUp = 0, string $secureKey = null): int
     {
@@ -31,12 +34,14 @@ class Cony
     }
 
     /**
-     * @param int         $input
-     * @param int         $padUp
-     * @param string|null $secureKey
-     * @param int         $transformType
+     * Converts a numeric ID to a short alphanumeric string.
      *
-     * @return string
+     * @param int         $input         The numeric ID to convert.
+     * @param int         $padUp         The amount to pad up, default is 0.
+     * @param string|null $secureKey     An optional key to secure the conversion.
+     * @param int         $transformType The transformation type (none, uppercase, lowercase).
+     *
+     * @return string The alphanumeric representation of the input number.
      */
     public static function toAlphanumeric(int $input, int $padUp = 0, string $secureKey = null, int $transformType = self::TRANSFORM_NONE): string
     {
@@ -53,6 +58,8 @@ class Cony
     }
 
     /**
+     * Generates a dictionary to be used for conversion.
+     * 
      * @return string
      */
     private static function generateDictionary(): string
@@ -89,6 +96,8 @@ class Cony
     }
 
     /**
+     * Converts a short alphanumeric string to a numeric ID.
+     * 
      * @param string $input
      * @param string $dictionary
      * @param int    $dictionaryLength
@@ -102,7 +111,7 @@ class Cony
         $len = strlen($input) - 1;
         for ($t = $len; $t >= 0; --$t) {
             if (function_exists('bcpow')) {
-                $pow = bcpow($dictionaryLength, $len - $t);
+                $pow = bcpow((string) $dictionaryLength, (string) ($len - $t));
             } else {
                 $pow = pow($dictionaryLength, $len - $t);
             }
@@ -116,6 +125,8 @@ class Cony
     }
 
     /**
+     * Converts a numeric ID to a short alphanumeric string.
+     * 
      * @param int    $input
      * @param string $dictionary
      * @param int    $dictionaryLength
@@ -131,7 +142,7 @@ class Cony
         $output = '';
         for ($t = (0 != $input ? floor(log($input, $dictionaryLength)) : 0); $t >= 0; --$t) {
             if (function_exists('bcpow')) {
-                $pow = bcpow($dictionaryLength, $t);
+                $pow = bcpow((string) $dictionaryLength, (string) $t);
             } else {
                 $pow = pow($dictionaryLength, $t);
             }
@@ -144,6 +155,8 @@ class Cony
     }
 
     /**
+     * Transforms the input string based on the type.
+     * 
      * @param string $input
      * @param int    $transformType
      *
