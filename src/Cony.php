@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 namespace carry0987\Cony;
 
 use carry0987\Cony\Exception\ConyException;
