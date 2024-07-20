@@ -12,7 +12,7 @@ composer require carry0987/cony
 ```php
 require dirname(__DIR__).'/vendor/autoload.php';
 
-use carry0987\Cony;
+use carry0987\Cony\Cony;
 
 echo Cony::toNumeric('test'); // 4544743
 echo '<br />';
